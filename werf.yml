@@ -1,0 +1,33 @@
+project: hello_world_go
+configVersion: 1
+---
+artifact: builder
+from: golang:alpine
+docker:
+  WORKDIR: /build
+  ENV: CGO_ENABLE=0
+  ENV: GOOS=linux
+  ENV: GO111MODULE=auto
+git:
+  add: ./main.go
+  to: /build
+  stageDependencies:
+    install:
+      - main.go
+shell:  RUN go build -o hello_world_go
+
+---
+image: hello_world_go
+from: golang:alpine
+docker:
+  WORKDIR: /app
+  USER: app
+  CMD: "./hello_world_go"
+shell:
+  beforeInstall:
+    - adduser --disabled-password app
+import:
+- artifact: builder
+  add: /build/hello_world_go
+  to: /app
+  owner: app
