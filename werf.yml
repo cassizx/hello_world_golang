@@ -27,6 +27,6 @@ shell:
 import:
 - artifact: builder
   add: /build/hello_world_go
-  to: /app
+  to: /app/hello_world_go
   owner: app
   after: setup
