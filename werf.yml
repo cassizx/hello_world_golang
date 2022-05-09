@@ -1,20 +1,18 @@
-project: hello_world_go
+project: hello-world-go
 configVersion: 1
 ---
 artifact: builder
 from: golang:alpine
-docker:
-  WORKDIR: /build
-  ENV: CGO_ENABLE=0
-  ENV: GOOS=linux
-  ENV: GO111MODULE=auto
 git:
-  add: ./main.go
+- add: /
   to: /build
   stageDependencies:
     install:
       - main.go
-shell:  RUN go build -o hello_world_go
+shell:
+  install:
+    - cd build
+    - CGO_ENABLE=0 GOOS=linux GO111MODULE=auto go build -o hello_world_go
 
 ---
 image: hello_world_go
@@ -31,3 +29,4 @@ import:
   add: /build/hello_world_go
   to: /app
   owner: app
+  after: setup
