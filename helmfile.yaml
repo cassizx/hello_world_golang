@@ -1,0 +1,8 @@
+helmDefaults:
+  createNamespace: true
+
+releases:
+  - chart: ./deployments/hello_world_go/
+    cleanupOnFail: false
+    name: dev
+    namespace: dev
