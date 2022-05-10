@@ -8,7 +8,7 @@ RUN go build -o hello_world_go
 
 FROM golang:alpine
 WORKDIR /app
-COPY --from=builder --chown=app:app /build/hello_world_go ./
 RUN adduser --disabled-password app
+COPY --from=builder --chown=app:app /build/hello_world_go ./
 USER app
 CMD [ "./hello_world_go" ]
