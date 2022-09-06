@@ -39,14 +39,14 @@ ingress:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: letsencrypt-staging
   hosts:
-    - host: go.alexkvdev.ml
+    - host: hello-go.alexkv.dev
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-   - secretName: tls-go-alexkvdev-ml
-     hosts:
-       - go.alexkvdev.ml
+    - secretName: tls-go-alexkv-dev
+      hosts:
+        - hello-go.alexkv.dev
 
 resources:
   limits:
